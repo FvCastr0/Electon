@@ -1,8 +1,14 @@
-
+import Head from "next/head";
 export default function Home() {
-    return (
-        <main>
+  return (
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
 
-        </main>
-    );
+      <main>
+
+      </main>
+    </>
+  );
 }
