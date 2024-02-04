@@ -110,7 +110,7 @@ export default function NavHeader() {
       <Redirects>
         <div>
           <IoPersonSharp />
-          <Link href="/">Sign in</Link>
+          <Link href="/auth/signin">Sign in</Link>
         </div>
 
         <div>
