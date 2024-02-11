@@ -15,9 +15,9 @@ class UserController {
         address: findUser.address,
       };
 
-      res.status(200).json({ user });
+      res.status(200).json({ user, success: true });
     } catch (e) {
-      res.status(500).json({ msg: 'Something went wrong' });
+      res.status(500).json({ msg: 'Something went wrong', success: false });
     }
   }
 
@@ -33,34 +33,35 @@ class UserController {
 
       if (!verifyIfUserEmailExist) {
         await User.create(data);
-        res.status(200).json({ msg: 'User created successfully' });
-      } else res.status(400).json({ msg: 'This email is already in use' });
+        res.status(200).json({ msg: 'User created successfully', success: true });
+      } else res.status(400).json({ msg: 'This email is already in use', success: false });
     } catch (e) {
-      res.status(500).json({ msg: 'Something went wrong' });
+      res.status(500).json({ msg: 'Something went wrong', success: false });
     }
   }
 
   async updateAddress(req, res) {
     try {
       await User.updateOne({ _id: req.userId }, { address: req.body.address });
-      res.status(200).json({ msg: 'Address added successfully' });
+      res.status(200).json({ msg: 'Address added successfully', success: true });
     } catch (e) {
-      res.status(500).json({ msg: 'Something went wrong' });
+      res.status(500).json({ msg: 'Something went wrong', success: false });
     }
   }
 
   async login(req, res) {
     try {
       const user = await User.findOne({ email: req.body.email });
-      const password = bcrypt.compareSync(req.body.password, user.password);
       if (user) {
+        const password = bcrypt.compareSync(req.body.password, user.password);
         if (password) {
-          const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: '1m' });
-          res.status(200).json({ msg: 'User logged in successfully', token });
-        } else res.status(400).json({ msg: 'The password is incorrect' });
-      } else res.status(400).json({ msg: 'User does not exist' });
+          const exp = Math.floor(Date.now() / 1000) + (30 * 24 * 60 * 60);
+          const token = jwt.sign({ id: user._id }, process.env.SECRET, { expiresIn: exp });
+          res.status(200).json({ msg: 'User logged in successfully', token, success: true });
+        } else res.status(400).json({ msg: 'The password is incorrect', success: false });
+      } else res.status(400).json({ msg: 'User does not exist', success: false });
     } catch (e) {
-      res.status(500).json({ msg: 'Something went wrong' });
+      res.status(500).json({ msg: 'Something went wrong', success: false });
     }
   }
 
@@ -74,11 +75,29 @@ class UserController {
         if (product.stock >= 1) {
           user.cart.push(product);
           user.save();
-          res.status(200).json({ msg: 'Product added to cart' });
-        } else res.status(400).json({ msg: 'The product is unavailable' });
-      } else res.status(400).json({ msg: 'This product does not exist' });
+          res.status(200).json({ msg: 'Product added to cart', success: true });
+        } else res.status(400).json({ msg: 'The product is unavailable', success: false });
+      } else res.status(400).json({ msg: 'This product does not exist', success: false });
     } catch (e) {
-      res.status(500).json({ msg: 'Something went wrong' });
+      res.status(500).json({ msg: 'Something went wrong', success: false });
+    }
+  }
+
+  async verifyIfTokenIsValidAndReturnUsername(req, res) {
+    try {
+      const { token } = req.body;
+      if (!token) {
+        return res.status(401).json({ msg: 'Unauthorized token' });
+      }
+      const decoded = jwt.verify(token, process.env.SECRET);
+      req.userId = decoded.id;
+      const { name } = await User.findOne({ _id: req.userId });
+      res.status(200).json({ name });
+      if (!req.userId) {
+        return res.status(401).json({ msg: 'Unidentified user' });
+      }
+    } catch (e) {
+      res.status(500).json({ msg: 'Something went wrong', success: false });
     }
   }
 
@@ -86,9 +105,9 @@ class UserController {
     try {
       const { userId } = req;
       await User.deleteOne({ _id: userId });
-      res.status(200).json({ msg: 'User deleted successfully' });
+      res.status(200).json({ msg: 'User deleted successfully', success: true });
     } catch (e) {
-      res.status(500).json({ msg: 'Something went wrong' });
+      res.status(500).json({ msg: 'Something went wrong', success: false });
     }
   }
 }

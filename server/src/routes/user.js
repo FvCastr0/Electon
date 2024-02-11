@@ -6,6 +6,7 @@ const router = new Router();
 
 router.post('/create', User.store);
 router.post('/login', User.login);
+router.post('/verifyToken', User.verifyIfTokenIsValidAndReturnUsername);
 
 router.get('/', verifyToken, User.show);
 router.post('/cart/add/:id', verifyToken, User.addProductToUserCart);
