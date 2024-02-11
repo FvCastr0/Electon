@@ -19,9 +19,13 @@ const Navbar = styled.nav`
     margin-bottom: 1rem;
   }
 
-  @media (max-width: 850px) {
+  @media (max-width: 1050px) {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    img {
+      margin: 0;
+    }
   }
 
   @media (max-width: 440px) {
