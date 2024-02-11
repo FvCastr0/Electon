@@ -1,7 +1,10 @@
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPersonSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import api from "../../http";
 
 const Navbar = styled.nav`
   background-color: ${({ theme }) => theme.colors.primaryColor};
@@ -98,6 +101,24 @@ const Redirects = styled.ul`
 `
 
 export default function NavHeader() {
+  const [name, setName] = useState('')
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const token = cookies.auth;
+
+  useEffect(() => {
+    if (token !== null) {
+      api.post('/api/user/verifyToken', {
+        token
+      })
+        .then(res => {
+          setName(res.data.name);
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    }
+  })
+
   return (
     <Navbar>
       <img src="/logo.png" alt="Logo" />
@@ -110,12 +131,18 @@ export default function NavHeader() {
       <Redirects>
         <div>
           <IoPersonSharp />
-          <Link href="/auth/signin">Sign in</Link>
+          {
+            name ? (
+              <Link to="/">{name}</Link>
+            ) : (
+              <Link to="/auth/signin">Sign in</Link>
+            )
+          }
         </div>
 
         <div>
           <FaShoppingCart />
-          <Link href="/">Cart</Link>
+          <Link to="/">Cart</Link>
         </div>
       </Redirects>
     </Navbar>

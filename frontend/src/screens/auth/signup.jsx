@@ -1,10 +1,10 @@
-import AuthCard from "@/components/StylesAuth/AuthCard";
-import AuthInput from "@/components/StylesAuth/AuthInput";
 import Head from "next/head";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import validator from "validator";
+import AuthCard from "../../components/StylesAuth/AuthCard";
+import AuthInput from "../../components/StylesAuth/AuthInput";
 
 const SignupPage = styled.div`
   display: flex;
