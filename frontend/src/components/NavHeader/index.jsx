@@ -121,7 +121,7 @@ export default function NavHeader() {
 
   return (
     <Navbar>
-      <img src="/logo.png" alt="Logo" />
+      <Link to="/"> <img src="/logo.png" alt="Logo" /></Link>
 
       <Search>
         <input type="text" placeholder="Search any things" />
@@ -145,6 +145,6 @@ export default function NavHeader() {
           <Link to="/">Cart</Link>
         </div>
       </Redirects>
-    </Navbar>
+    </Navbar >
   );
 }

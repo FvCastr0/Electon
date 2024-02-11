@@ -10,7 +10,6 @@ const verifyUserTokenRedirect = (token) => {
       })
       .catch(e => {
         console.log(e);
-
       })
   }
 

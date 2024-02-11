@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import validator from "validator";
 import AuthCard from "../../components/StylesAuth/AuthCard";
 import AuthInput from "../../components/StylesAuth/AuthInput";
+import api from "../../http";
 
 const SignupPage = styled.div`
   display: flex;
@@ -17,38 +19,64 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+
+  let err = {};
+
+  // useEffect(() => {
+  //   if (cookies.auth !== null) verifyUserTokenRedirect(cookies.auth);
+  // })
 
 
-  function handleSubmitForm(e) {
+  async function handleSubmitForm(e) {
     e.preventDefault();
-    handleCheckName();
-    handleCheckEmail();
-    handleCheckPassword();
+
+    if (handleCheckName && handleCheckEmail && handleCheckPassword)
+      await api.post('/api/user/create', {
+        name, email, password,
+      })
+        .then(res => {
+          if (res.status === 200) toast.success(res.data.msg);
+          window.location.href = '/auth/signin'
+        })
+        .catch(e => {
+          console.log(e);
+          if (e.response.status === 400) {
+            err = { success: false, msg: e.response.data.msg }
+          }
+        })
+
+    if (!err.success) {
+      toast.error(err.msg);
+    }
   }
 
   function handleCheckName() {
     if (name.length < 3) {
       toast.error('The name must have at least 3 characters')
-      return;
+      return false;
     }
   }
 
   function handleCheckEmail() {
     if (!validator.isEmail(email)) {
       toast.error('Invalid Email')
-      return;
-    }
+      return false;
+    } else return true;
   }
 
   function handleCheckPassword() {
     if (password.length < 6) {
       toast.error('The password must have at least 6 characters')
-      return;
+      return false;
     }
+
     if (password !== checkPassword) {
       toast.error('Passwords must be the same')
-      return;
+      return false;
     }
+
+    return true
   }
 
   return (

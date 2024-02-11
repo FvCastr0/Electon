@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import styled from "styled-components";
-import verifyUserTokenRedirect from "../../auth/verifyUserTokenRedirect";
 import AuthCard from "../../components/StylesAuth/AuthCard";
 import AuthInput from "../../components/StylesAuth/AuthInput";
 import api from '../../http';
@@ -20,11 +19,9 @@ export default function Signin() {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   let err = {};
 
-  useEffect(() => {
-    if (cookies.auth !== null) verifyUserTokenRedirect(cookies.auth);
-  })
-
-
+  // useEffect(() => {
+  //   if (cookies.auth !== null) verifyUserTokenRedirect(cookies.auth);
+  // })
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +32,7 @@ export default function Signin() {
       .then(res => {
         if (res.status === 200) toast.success(res.data.msg);
         setCookie('auth', res.data.token);
+        window.location.href = '/';
       })
       .catch(e => {
         if (e.response.status === 400) {
