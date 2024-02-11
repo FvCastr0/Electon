@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components'
 import NavHeader from './components/NavHeader/index.jsx'
 import Signin from './screens/auth/signin.jsx'
 import Signup from './screens/auth/signup.jsx'
+import Home from './screens/home.jsx'
 import './styles/reset.css'
 import { theme } from './styles/theme.js'
 
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <NavHeader />
         <Routes>
+          <Route exact path="/" element={<Home />} />
           <Route path="/auth/signin" element={<Signin />} />
           <Route path="/auth/signup" element={<Signup />} />
         </Routes>

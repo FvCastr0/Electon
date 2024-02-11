@@ -19,10 +19,6 @@ export default function Signin() {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   let err = {};
 
-  // useEffect(() => {
-  //   if (cookies.auth !== null) verifyUserTokenRedirect(cookies.auth);
-  // })
-
   async function handleSubmit(e) {
     e.preventDefault();
 

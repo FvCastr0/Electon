@@ -23,11 +23,6 @@ export default function Signup() {
 
   let err = {};
 
-  // useEffect(() => {
-  //   if (cookies.auth !== null) verifyUserTokenRedirect(cookies.auth);
-  // })
-
-
   async function handleSubmitForm(e) {
     e.preventDefault();
 
