@@ -6,11 +6,12 @@ const HeaderStyled = styled.header`
   justify-content: space-around;
   font-family: 'Poppins';
   flex-wrap: wrap;
+  margin-bottom: 2.5rem;
 
 `
 
 const Title = styled.article`
-    margin: 1rem;
+    margin: 5rem 0;
 
   h1 {
       color: ${({ theme }) => theme.colors.primaryColor};
@@ -117,7 +118,11 @@ const Product = styled.article`
       font-size: 1.1rem;
       font-family: 'Poppins';
       line-height: 1.6rem;
-      color: ${({ theme }) => theme.colors.primaryColor}
+      color: ${({ theme }) => theme.colors.primaryColor};
+
+      @media (max-width: 400px) {
+        white-space: wrap;
+      }
     }
 
   img {
@@ -146,7 +151,7 @@ export default function Header() {
       <ProductCategory>
 
         <Product>
-          <img src="/product/speaker.png" alt="Speaker" />
+          <img src="/productHeader/speaker.png" alt="Speaker" />
           <div>
             <h1>Speaker</h1>
             <legend>(6 items)</legend>
@@ -154,7 +159,7 @@ export default function Header() {
         </Product>
 
         <Product>
-          <img src="/product/laptop.png" alt="Desktop and laptop" />
+          <img src="/productHeader/laptop.png" alt="Desktop and laptop" />
           <div>
             <h1>Desktop & laptop</h1>
             <legend>(6 items)</legend>
@@ -162,7 +167,7 @@ export default function Header() {
         </Product>
 
         <Product>
-          <img src="/product/camera.png" alt="Camera" />
+          <img src="/productHeader/camera.png" alt="Camera" />
           <div>
             <h1>DSLR Camera</h1>
             <legend>(6 items)</legend>
