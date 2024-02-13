@@ -30,6 +30,15 @@ class ProductController {
       res.status(500).json({ msg: 'Something went wrong' });
     }
   }
+
+  async delete(req, res) {
+    try {
+      await Product.deleteOne({ _id: req.params.id });
+      res.status(200).json({ msg: 'Product deleted successfully' });
+    } catch (e) {
+      res.status(500).json({ msg: 'Something went wrong' });
+    }
+  }
 }
 
 module.exports = new ProductController();

@@ -5,6 +5,7 @@ const router = new Router();
 
 router.get('/', Product.show);
 router.post('/create', Product.store);
+router.delete('/delete/:id', Product.delete);
 router.patch('/changeStock/:id', Product.changeStock);
 
 module.exports = router;
