@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { toast } from "react-toastify";
@@ -76,9 +75,6 @@ export default function Signup() {
 
   return (
     <>
-      <Head>
-        <title>Sign Up</title>
-      </Head>
 
       <SignupPage onSubmit={handleSubmitForm}>
         <AuthCard>
