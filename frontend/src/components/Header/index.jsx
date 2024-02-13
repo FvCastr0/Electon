@@ -93,7 +93,7 @@ const Image = styled.div`
 
 const ProductCategory = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
 `
 
@@ -105,12 +105,10 @@ const Product = styled.article`
   border: 1px solid;
   border-color: #A5A5A5;
   border-radius: 1rem;
-
   padding: .4rem 3rem;
   width: 250px;
   max-width: 300px;
-  margin: 0 .5rem;
-  margin-top: 2rem;
+  margin: 1rem 3rem;
 
     div {
       white-space: nowrap;

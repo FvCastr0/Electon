@@ -6,15 +6,16 @@ import styled from "styled-components";
 
 const Card = styled.article`
   width: 100%;
-  max-width: 280px;
+  max-width: 300px;
   border: 1px solid #A5A5A5;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   margin: 1rem 1.5rem;
-  height: 220px;
+  height: 250px;
 
   img {
+    margin-top: 1.2rem;
     width: 150px;
     max-height: 150px;
     align-self: center;
@@ -24,7 +25,7 @@ const Card = styled.article`
   article {
     line-height: 1.8rem;
     margin-top: .5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     margin-left: 1.2rem;
   }
 
@@ -95,7 +96,15 @@ const Card = styled.article`
 
   @media (max-width: 768px) {
     height: 290px;
+    &:hover {
+    article {
+      display: block;
+    }
 
+    div {
+      display: flex;
+    }
+  }
     div {
       display: flex;
     }
