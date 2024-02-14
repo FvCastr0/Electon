@@ -40,6 +40,12 @@ const AuthCard = styled.form`
   a {
     color: ${({ theme }) => theme.colors.primaryColor};
   }
+
+  @media (max-width: 650px) {
+    background-color: white;
+    border: none;
+  }
+
 `
 
 export default AuthCard;

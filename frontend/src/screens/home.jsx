@@ -10,6 +10,11 @@ const ProductTitle = styled.main`
     font-size: 1.7rem;
     font-weight: 600;
     margin: 6rem 0 2rem 8rem;
+
+    @media (max-width: 650px) {
+      margin: 6rem 0 2rem 0;
+      text-align: center;
+    }
 `
 
 const Products = styled.main`

@@ -35,6 +35,12 @@ const AuthInput = styled.div`
       font-size: 14px;
       margin-top: -18px;
     }
+
+    @media (max-width: 400px) {
+      input {
+        width: 17rem;
+      }
+    }
 `
 
 export default AuthInput;
