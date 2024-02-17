@@ -17,7 +17,6 @@ export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
-  let err = {};
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,13 +31,9 @@ export default function Signin() {
       })
       .catch(e => {
         if (e.response.status === 400) {
-          err = { success: false, msg: e.response.data.msg }
+          toast.error(e.response.data.msg)
         }
       })
-
-    if (!err.success) {
-      toast.error(err.msg);
-    }
   }
 
   return (

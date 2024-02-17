@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CardProduct from '../components/CardProducts'
 import Header from '../components/Header'
+import QualityCard from '../components/QualityCard'
 import api from '../http/index'
 
 const ProductTitle = styled.main`
@@ -130,6 +131,20 @@ const Laptop = styled.div`
 }
   }
 `
+const Qualities = styled.section`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: ${({ theme }) => theme.colors.lightBlue};
+  margin: 3rem 4rem;
+  padding: 2rem;
+  border-radius: 1rem;
+
+  @media (max-width: 400px) {
+    margin: 3rem 2rem;
+  }
+`
+
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -179,6 +194,31 @@ export default function Home() {
           </div>
         </article>
       </Laptop>
+
+      <Qualities>
+
+        <QualityCard
+          img='/box-tick.svg'
+          alt='box icon quality'
+          title='Free delivery'
+          description='on order above $50.00'
+        />
+
+        <QualityCard
+          img='/crown.svg'
+          alt='crown icon quality'
+          title='Best quallity'
+          description='best quality in low price'
+        />
+
+        <QualityCard
+          img='/shield-security.svg'
+          alt='shield security icon quality'
+          title='1 year warranty'
+          description='available warranty'
+        />
+      </Qualities>
+
     </>
   )
 }

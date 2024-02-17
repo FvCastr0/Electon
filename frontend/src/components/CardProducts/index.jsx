@@ -73,7 +73,8 @@ const Card = styled.article`
     color: #000;
     font-size: 1.1rem;
     align-self: center;
-    padding-left: .95rem;
+    padding-right: .7rem;
+    padding-left: .4rem;
   }
 
   div button span {

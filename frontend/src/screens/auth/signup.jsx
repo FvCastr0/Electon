@@ -5,7 +5,7 @@ import styled from "styled-components";
 import validator from "validator";
 import AuthCard from "../../components/StylesAuth/AuthCard";
 import AuthInput from "../../components/StylesAuth/AuthInput";
-import api from "../../http";
+import api from '../../http';
 
 const SignupPage = styled.div`
   display: flex;
@@ -20,12 +20,37 @@ export default function Signup() {
   const [checkPassword, setCheckPassword] = useState('');
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
 
-  let err = {};
-
   async function handleSubmitForm(e) {
     e.preventDefault();
+    let isOk;
 
-    if (handleCheckName && handleCheckEmail && handleCheckPassword)
+    if (name.length < 3) {
+      toast.error('The name must have at least 3 characters')
+      isOk = false;
+      return;
+    } else isOk = true;
+
+    if (!validator.isEmail(email)) {
+      toast.error('Invalid Email')
+      isOk = false;
+      return;
+    } else isOk = true;
+
+
+    if (password !== checkPassword) {
+      toast.error('Passwords must be the same')
+      isOk = false;
+      return;
+    } else isOk = true;
+
+
+    if (password.length < 6) {
+      toast.error('The password must have at least 6 characters')
+      isOk = false;
+      return;
+    } else isOk = true;
+
+    if (isOk) {
       await api.post('/api/user/create', {
         name, email, password,
       })
@@ -36,46 +61,14 @@ export default function Signup() {
         .catch(e => {
           console.log(e);
           if (e.response.status === 400) {
-            err = { success: false, msg: e.response.data.msg }
+            toast.error(e.response.data.msg)
           }
         })
-
-    if (!err.success) {
-      toast.error(err.msg);
     }
-  }
-
-  function handleCheckName() {
-    if (name.length < 3) {
-      toast.error('The name must have at least 3 characters')
-      return false;
-    }
-  }
-
-  function handleCheckEmail() {
-    if (!validator.isEmail(email)) {
-      toast.error('Invalid Email')
-      return false;
-    } else return true;
-  }
-
-  function handleCheckPassword() {
-    if (password.length < 6) {
-      toast.error('The password must have at least 6 characters')
-      return false;
-    }
-
-    if (password !== checkPassword) {
-      toast.error('Passwords must be the same')
-      return false;
-    }
-
-    return true
   }
 
   return (
     <>
-
       <SignupPage onSubmit={handleSubmitForm}>
         <AuthCard>
           <h1>Sign up</h1>
