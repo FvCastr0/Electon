@@ -18,7 +18,7 @@ class App {
     this.app.use(cors());
 
     this.app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', 'https://electonwb.vercel.app');
+      res.setHeader('Access-Control-Allow-Origin', 'https://electonwb.vercel.app', 'http://localhost:5173');
       res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, application/json');
       next();
     });
