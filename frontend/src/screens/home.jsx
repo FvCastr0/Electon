@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CardProduct from '../components/CardProducts'
+import FeedbackCard from '../components/FeedbackCard'
 import Header from '../components/Header'
 import QualityCard from '../components/QualityCard'
 import api from '../http/index'
@@ -32,7 +33,7 @@ const Laptop = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 8rem 0;
+  margin: 4rem 0;
 
   .laptopG {
     border-radius: 1rem;
@@ -135,7 +136,7 @@ const Qualities = styled.section`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  background-color: ${({ theme }) => theme.colors.lightBlue};
+  background-color: #92D5FF;
   margin: 3rem 4rem;
   padding: 2rem;
   border-radius: 1rem;
@@ -143,6 +144,12 @@ const Qualities = styled.section`
   @media (max-width: 400px) {
     margin: 3rem 2rem;
   }
+`
+const Feedback = styled.section`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 6rem;
+  flex-wrap: wrap;
 `
 
 
@@ -218,6 +225,32 @@ export default function Home() {
           description='available warranty'
         />
       </Qualities>
+
+      <Feedback>
+        <FeedbackCard
+          alt='person of feedback'
+          img='/people/person1.png'
+          title='Savannah Nguyen'
+          description='Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper.
+          Phasellus tristique aenean at lorem sed scelerisque.'
+        />
+
+        <FeedbackCard
+          alt='person of feedback'
+          img='/people/person2.png'
+          title='Esther Howard'
+          description='Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper.
+          Phasellus tristique aenean at lorem sed scelerisque.'
+        />
+
+        <FeedbackCard
+          alt='person of feedback'
+          img='/people/person3.png'
+          title='Esther Howard'
+          description='Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper.
+          Phasellus tristique aenean at lorem sed scelerisque.'
+        />
+      </Feedback>
 
     </>
   )
