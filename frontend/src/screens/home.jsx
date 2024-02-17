@@ -152,6 +152,15 @@ const Feedback = styled.section`
   flex-wrap: wrap;
 `
 
+const Brands = styled.section`
+  display: flex;
+  justify-content: space-around;
+  background-color: #cfedff;
+  padding: 2.5rem;
+  margin: 6rem 3rem;
+  flex-wrap: wrap;
+`
+
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -251,6 +260,14 @@ export default function Home() {
           Phasellus tristique aenean at lorem sed scelerisque.'
         />
       </Feedback>
+
+      <Brands>
+        <img src="/brands/brand1.png" alt="brand logo" />
+        <img src="/brands/brand2.png" alt="brand logo" />
+        <img src="/brands/brand3.png" alt="brand logo" />
+        <img src="/brands/brand4.png" alt="brand logo" />
+        <img src="/brands/brand5.png" alt="brand logo" />
+      </Brands>
 
     </>
   )
