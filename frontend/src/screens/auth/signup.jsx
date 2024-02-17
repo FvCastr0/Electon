@@ -64,20 +64,19 @@ export default function Signup() {
       })
         .then(res => {
           if (res.status === 200) toast.success(res.data.msg);
+          api.post('/api/user/login', {
+            email, password
+          })
+            .then(res => {
+              setCookie('auth', res.data.token);
+              navigate("/");
+            })
         })
         .catch(e => {
           console.log(e);
           if (e.response.status === 400) {
             toast.error(e.response.data.msg)
           }
-        })
-
-      await api.post('/api/user/login', {
-        email, password
-      })
-        .then(res => {
-          setCookie('auth', res.data.token);
-          navigate("/");
         })
     }
   }
