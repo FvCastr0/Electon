@@ -32,6 +32,12 @@ export default function Signup() {
       return;
     } else isOk = true;
 
+    if (name.length > 12) {
+      toast.error('The name must have a maximum of 12 characters')
+      isOk = false;
+      return;
+    } else isOk = true;
+
     if (!validator.isEmail(email)) {
       toast.error('Invalid Email')
       isOk = false;
