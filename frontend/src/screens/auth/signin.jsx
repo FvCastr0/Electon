@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import styled from "styled-components";
 import AuthCard from "../../components/StylesAuth/AuthCard";
 import AuthInput from "../../components/StylesAuth/AuthInput";
 import api from '../../http';
+
+
 
 const SigninPage = styled.div`
   display: flex;
@@ -17,6 +19,8 @@ export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const navigate = useNavigate();
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -27,7 +31,7 @@ export default function Signin() {
       .then(res => {
         if (res.status === 200) toast.success(res.data.msg);
         setCookie('auth', res.data.token);
-        window.location.href = '/';
+        navigate('/');
       })
       .catch(e => {
         if (e.response.status === 400) {

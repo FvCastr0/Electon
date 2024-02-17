@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import validator from "validator";
@@ -19,6 +20,7 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const navigate = useNavigate();
 
   async function handleSubmitForm(e) {
     e.preventDefault();
@@ -56,13 +58,20 @@ export default function Signup() {
       })
         .then(res => {
           if (res.status === 200) toast.success(res.data.msg);
-          window.location.href = '/auth/signin'
         })
         .catch(e => {
           console.log(e);
           if (e.response.status === 400) {
             toast.error(e.response.data.msg)
           }
+        })
+
+      await api.post('/api/user/login', {
+        email, password
+      })
+        .then(res => {
+          setCookie('auth', res.data.token);
+          navigate("/");
         })
     }
   }
