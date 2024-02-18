@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import CardProduct from '../components/CardProducts'
 import FeedbackCard from '../components/FeedbackCard'
 import Header from '../components/Header'
+import NewsCard from '../components/NewsCard'
 import QualityCard from '../components/QualityCard'
 import api from '../http/index'
 
@@ -159,6 +160,32 @@ const Brands = styled.section`
   padding: 2.5rem;
   margin: 6rem 3rem;
   flex-wrap: wrap;
+
+  @media (max-width: 1050px) {
+    img {
+      margin-bottom: 3rem;
+    }
+  }
+`
+
+const News = styled.section`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+`
+
+const NewsTitle = styled.h1`
+    font-family: 'Poppins';
+    color: ${({ theme }) => theme.colors.primaryColor};
+    font-size: 1.5rem;
+    margin-left: 8rem;
+    margin-bottom: 4.2rem;
+    font-weight: bold;
+    @media (max-width: 768px) {
+        text-align: center;
+        margin-left: 0;
+    }
 `
 
 
@@ -268,6 +295,25 @@ export default function Home() {
         <img src="/brands/brand4.png" alt="brand logo" />
         <img src="/brands/brand5.png" alt="brand logo" />
       </Brands>
+
+      <NewsTitle>Latest news</NewsTitle>
+      <News>
+        <NewsCard
+          img='/news/image1.png'
+          date='22,oct,2021'
+          title='Who avoids a pain that produces?'
+          description='Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.'
+          author='By spacing tech'
+        />
+
+        <NewsCard
+          img='/news/image2.png'
+          date='22,oct,2021'
+          title='Who avoids a pain that produces?'
+          description='Lorem ipsum dolor sit amet consectetur. Nec sit enim tellus faucibus bibendum ullamcorper. Phasellus tristique aenean at lorem sed scelerisque.'
+          author='By spacing tech'
+        />
+      </News>
 
     </>
   )
