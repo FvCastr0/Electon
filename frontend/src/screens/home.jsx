@@ -137,7 +137,7 @@ const Qualities = styled.section`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  background-color: #92D5FF;
+  background-color: #E2F4FF;
   margin: 3rem 4rem;
   padding: 2rem;
   border-radius: 1rem;
@@ -156,7 +156,7 @@ const Feedback = styled.section`
 const Brands = styled.section`
   display: flex;
   justify-content: space-around;
-  background-color: #cfedff;
+  background-color: #E2F4FF;
   padding: 2.5rem;
   margin: 6rem 3rem;
   flex-wrap: wrap;

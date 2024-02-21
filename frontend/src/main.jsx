@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ThemeProvider } from 'styled-components'
+import Footer from './components/Footer/index.jsx'
 import NavHeader from './components/NavHeader/index.jsx'
 import Signin from './screens/auth/signin.jsx'
 import Signup from './screens/auth/signup.jsx'
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/auth/signin" element={<Signin />} />
           <Route path="/auth/signup" element={<Signup />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
 
       <ToastContainer

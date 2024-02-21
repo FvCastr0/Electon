@@ -30,7 +30,7 @@ const Card = styled.article`
   }
 
   p {
-    background-color: #92D5FF;
+    background-color: #E2F4FF;
     font-size: .9rem;
     margin: 0 .5rem;
     padding: 1.2rem;
